@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Login index</title>
+</head>
+<body>
+<div>
+    <div></div>
+    <div>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <h3>注册</h3>
+                        </div>
+                        <form id="form" @submit.prevent="submit">
+                            <div>
+                                <label for="username">用户名</label>
+                                <input type="text" placeholder="输入用户名" id="username" name="username" v-model="user.username">
+                            </div>
+                            <div>
+                                <label for="password">密码</label>
+                                <input type="password" placeholder="输入密码" id="password" name="password" v-model="user.password">
+                            </div>
+                            <div>
+                                <label for="password">邮箱</label>
+                                <input type="email" placeholder="输入邮箱" id="email" name="email" v-model="user.email">
+                            </div>
+                            <div>
+                                <label>性别</label>
+                                <label><input type="radio" name="gender" value="male">男</label>
+                                <label><input type="radio" name="gender" value="female">女</label>
+                            </div>
+                            <div>
+                                <label for="password">手机号</label>
+                                <input type="text" placeholder="输入手机号" id="phone" name="phone" v-model="user.phone">
+                            </div>
+                            <div>
+                                <button type="button">获取验证码</button>
+                            </div>
+                            <div>
+                                <label for="password">验证码</label>
+                                <input type="text" placeholder="输入验证码" id="verify" name="verify">
+                            </div>
+                            <div>
+                                <span><a href="login.html">登录</a></span>
+                            </div>
+                            <input type="submit" value="注册">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/main.js"></script>
+</body>
+<script>
+    Vue.http.options.emulateJSON = true
+    Vue.http.options.emulateHTTP = true
+    new Vue({
+        el:"#form",
+        data:{
+            user:{
+                username:"",
+                password:"",
+            },
+        },
+        methods:{
+            submit:function (){
+                var usernameLength = this.user.username.split(' ').join('').length;
+                var passwordLength =  this.user.password.split(' ').join('').length;
+                var config;
+                if (usernameLength == 0 || passwordLength == 0) {
+                    alert("用户名或密码不能为空！");
+                    return;
+                } else {
+                    config = {
+                        baseURL: 'http://localhost:8080/Time_machine',
+                        timeout: 1000,
+                        headers: {
+                            'Content-Type':'application/json',
+                        }
+                    }
+                    axios.post("/login/login.do", this.user, config)
+                        .then(
+                            function (res) {
+                                console.log(res.data);
+                                console.log(res.status);
+
+                            }
+                        )
+                        .catch(
+                            function () {
+                                console.log("服务器异常！");
+                            }
+                        );
+                }
+            },
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.time_machine.dao.IPictureDao">
+    <select id="getPicture" parameterType="long" resultType="Picture">
+        SELECT id,picture_name,shoot_time,shoot_location,shoot_longitude,shoot_latitude,path,picture_type,
+        picture_description,picture_privacy	FROM tf_f_picture WHERE id =  #{id}
+    </select>
+</mapper>

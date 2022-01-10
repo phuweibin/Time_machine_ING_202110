@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Time_machile" />
+        <module name="Time_machine" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Time_machile" target="1.8" />
+      <module name="Time_machine" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
